@@ -26,7 +26,7 @@ public class WinningLottoTest {
 	@Test
 	@DisplayName("4개가 일치하는 당첨 결과를 계산할 수 있다.")
 	void matchFourRank() {
-		// 3등 당첨 Lotto, WinningLotto
+		// 4등 당첨 Lotto, WinningLotto
 		Lotto testLotto = convertToLotto(1, 2, 3, 4, 5, 6);
 		Lotto winnigLotto = convertToLotto(1, 2, 3, 4, 8, 9);
 		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoNumber(10));
@@ -40,7 +40,7 @@ public class WinningLottoTest {
 	@Test
 	@DisplayName("5개가 일치하는 당첨 결과를 계산할 수 있다.")
 	void matchFiveRank() {
-		// 3등 당첨 Lotto, WinningLotto
+		// 5등 당첨 Lotto, WinningLotto
 		Lotto testLotto = convertToLotto(1, 2, 3, 4, 5, 6);
 		Lotto winnigLotto = convertToLotto(1, 2, 3, 4, 5, 9);
 		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoNumber(10));
@@ -54,7 +54,7 @@ public class WinningLottoTest {
 	@Test
 	@DisplayName("5개와 보너스 숫자가 일치하는 당첨 결과를 계산할 수 있다.")
 	void matchFiveWithBonusRank() {
-		// 3등 당첨 Lotto, WinningLotto
+		// 5등 + 보너스 당첨 Lotto, WinningLotto
 		Lotto testLotto = convertToLotto(1, 2, 3, 4, 5, 6);
 		Lotto winnigLotto = convertToLotto(1, 2, 3, 4, 5, 9);
 		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoNumber(6));
@@ -68,7 +68,7 @@ public class WinningLottoTest {
 	@Test
 	@DisplayName("6개가 일치하는 당첨 결과를 계산할 수 있다.")
 	void matchSixRank() {
-		// 3등 당첨 Lotto, WinningLotto
+		// 6등 당첨 Lotto, WinningLotto
 		Lotto testLotto = convertToLotto(1, 2, 3, 4, 5, 6);
 		Lotto winnigLotto = convertToLotto(1, 2, 3, 4, 5, 6);
 		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoNumber(10));
