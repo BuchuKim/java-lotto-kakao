@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import domain.EarningRate;
 import domain.Lotto;
-import domain.LottoBall;
+import domain.LottoNumber;
 import domain.Lottos;
 import domain.Rank;
 import domain.WinningResult;
@@ -21,11 +21,11 @@ public class LottoGameView {
 		return Integer.parseInt(sc.nextLine());
 	}
 
-	public List<LottoBall> getWinningLottoNumbers() {
+	public List<LottoNumber> getWinningLottoNumbers() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		return Arrays.stream(sc.nextLine().split(LOTTO_SEPARATOR))
 			.map(Integer::parseInt)
-			.map(LottoBall::new)
+			.map(LottoNumber::new)
 			.collect(Collectors.toList());
 	}
 

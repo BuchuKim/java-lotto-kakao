@@ -2,79 +2,87 @@ package domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class WinningLottoTest {
 	@Test
-	@DisplayName("당첨 결과를 계산할 수 있다.")
-	void checkRank() {
-		Lotto testLotto = LottoBall.toLotto(1, 2, 3, 4, 5, 6);
-		Lotto winnigLotto = LottoBall.toLotto(1, 2, 3, 7, 8, 9);
-		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoBall(10));
+	@DisplayName("3개가 일치하는 당첨 결과를 계산할 수 있다.")
+	void matchThreeRank() {
+		// 3등 당첨 Lotto, WinningLotto
+		Lotto testLotto = convertToLotto(1, 2, 3, 4, 5, 6);
+		Lotto winnigLotto = convertToLotto(1, 2, 3, 7, 8, 9);
+		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoNumber(10));
 
 		Rank rank = testWinningLotto.getRank(testLotto);
 
 		assertThat(rank).isEqualTo(Rank.MATCH_THREE);
+		assertThat(rank.getWinningMoney()).isEqualTo(Rank.MATCH_THREE.getWinningMoney());
 	}
 
 	@Test
-	@DisplayName("숫자 3개가 일치하면 5,000원이다.")
-	void checkThree() {
-		Lotto testLotto = LottoBall.toLotto(1, 2, 3, 4, 5, 6);
-		Lotto winnigLotto = LottoBall.toLotto(1, 2, 3, 7, 8, 9);
-		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoBall(10));
+	@DisplayName("4개가 일치하는 당첨 결과를 계산할 수 있다.")
+	void matchFourRank() {
+		// 3등 당첨 Lotto, WinningLotto
+		Lotto testLotto = convertToLotto(1, 2, 3, 4, 5, 6);
+		Lotto winnigLotto = convertToLotto(1, 2, 3, 4, 8, 9);
+		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoNumber(10));
 
-		WinningMoney winningMoney = testWinningLotto.getResultAmount(testLotto);
+		Rank rank = testWinningLotto.getRank(testLotto);
 
-		assertThat(winningMoney.getMoney()).isEqualTo(WinningMoney.MATCH_THREE);
+		assertThat(rank).isEqualTo(Rank.MATCH_FOUR);
+		assertThat(rank.getWinningMoney()).isEqualTo(Rank.MATCH_FOUR.getWinningMoney());
 	}
 
 	@Test
-	@DisplayName("숫자 4개가 일치하면 50,000원이다.")
-	void checkFour() {
-		Lotto testLotto = LottoBall.toLotto(1, 2, 3, 4, 5, 6);
-		Lotto winnigLotto = LottoBall.toLotto(1, 2, 3, 4, 8, 9);
-		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoBall(10));
+	@DisplayName("5개가 일치하는 당첨 결과를 계산할 수 있다.")
+	void matchFiveRank() {
+		// 3등 당첨 Lotto, WinningLotto
+		Lotto testLotto = convertToLotto(1, 2, 3, 4, 5, 6);
+		Lotto winnigLotto = convertToLotto(1, 2, 3, 4, 5, 9);
+		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoNumber(10));
 
-		WinningMoney winningMoney = testWinningLotto.getResultAmount(testLotto);
+		Rank rank = testWinningLotto.getRank(testLotto);
 
-		assertThat(winningMoney.getMoney()).isEqualTo(WinningMoney.MATCH_FOUR);
+		assertThat(rank).isEqualTo(Rank.MATCH_FIVE);
+		assertThat(rank.getWinningMoney()).isEqualTo(Rank.MATCH_FIVE.getWinningMoney());
 	}
 
 	@Test
-	@DisplayName("숫자 5개가 일치하면 1,500,000원이다.")
-	void checkFive() {
-		Lotto testLotto = LottoBall.toLotto(1, 2, 3, 4, 5, 6);
-		Lotto winnigLotto = LottoBall.toLotto(1, 2, 3, 4, 5, 9);
-		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoBall(10));
+	@DisplayName("5개와 보너스 숫자가 일치하는 당첨 결과를 계산할 수 있다.")
+	void matchFiveWithBonusRank() {
+		// 3등 당첨 Lotto, WinningLotto
+		Lotto testLotto = convertToLotto(1, 2, 3, 4, 5, 6);
+		Lotto winnigLotto = convertToLotto(1, 2, 3, 4, 5, 9);
+		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoNumber(6));
 
-		WinningMoney winningMoney = testWinningLotto.getResultAmount(testLotto);
+		Rank rank = testWinningLotto.getRank(testLotto);
 
-		assertThat(winningMoney.getMoney()).isEqualTo(WinningMoney.MATCH_FIVE);
+		assertThat(rank).isEqualTo(Rank.MATCH_FIVE_WITH_BONUS);
+		assertThat(rank.getWinningMoney()).isEqualTo(Rank.MATCH_FIVE_WITH_BONUS.getWinningMoney());
 	}
 
 	@Test
-	@DisplayName("숫자 5개와 보너스 번호가 일치하면 30,000,000원이다.")
-	void checkFiveWithBonus() {
-		Lotto testLotto = LottoBall.toLotto(1, 2, 3, 4, 5, 6);
-		Lotto winnigLotto = LottoBall.toLotto(1, 2, 3, 4, 5, 9);
-		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoBall(6));
+	@DisplayName("6개가 일치하는 당첨 결과를 계산할 수 있다.")
+	void matchSixRank() {
+		// 3등 당첨 Lotto, WinningLotto
+		Lotto testLotto = convertToLotto(1, 2, 3, 4, 5, 6);
+		Lotto winnigLotto = convertToLotto(1, 2, 3, 4, 5, 6);
+		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoNumber(10));
 
-		WinningMoney winningMoney = testWinningLotto.getResultAmount(testLotto);
+		Rank rank = testWinningLotto.getRank(testLotto);
 
-		assertThat(winningMoney.getMoney()).isEqualTo(WinningMoney.MATCH_FIVE_WITH_BONUS);
+		assertThat(rank).isEqualTo(Rank.MATCH_SIX);
+		assertThat(rank.getWinningMoney()).isEqualTo(Rank.MATCH_SIX.getWinningMoney());
 	}
 
-	@Test
-	@DisplayName("숫자 6개가 일치하면 2,000,000,000원이다.")
-	void checkSix() {
-		Lotto testLotto = LottoBall.toLotto(1, 2, 3, 4, 5, 6);
-		Lotto winnigLotto = LottoBall.toLotto(1, 2, 3, 4, 5, 6);
-		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoBall(10));
-
-		WinningMoney winningMoney = testWinningLotto.getResultAmount(testLotto);
-
-		assertThat(winningMoney.getMoney()).isEqualTo(WinningMoney.MATCH_SIX);
+	private Lotto convertToLotto(int ...lottoNumbers) {
+		return new Lotto(
+			Arrays.stream(lottoNumbers)
+				.mapToObj(LottoNumber::new)
+				.collect(Collectors.toList()));
 	}
 }

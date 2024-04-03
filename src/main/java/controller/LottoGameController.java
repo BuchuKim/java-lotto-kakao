@@ -2,11 +2,10 @@ package controller;
 
 import java.util.List;
 
-import domain.EarningRate;
 import domain.Lotto;
-import domain.LottoBall;
 import domain.LottoGenerator;
 import domain.LottoMoney;
+import domain.LottoNumber;
 import domain.Lottos;
 import domain.WinningLotto;
 import domain.WinningResult;
@@ -31,7 +30,7 @@ public class LottoGameController {
 		WinningResult winningResult = WinningResult.of(winningLotto, lottos);
 
 		lottoGameView.printWinningRank(winningResult);
-		lottoGameView.printEarningRate(EarningRate.of(lottoMoney, winningResult.getWinningMoney()));
+		lottoGameView.printEarningRate(winningResult.calculateEarningRate(lottoMoney));
 	}
 
 	private LottoMoney getLottoMoney() {
@@ -39,23 +38,13 @@ public class LottoGameController {
 			return new LottoMoney(lottoGameView.getLottoMoneyInput());
 		} catch (IllegalArgumentException e) {
 			System.out.println("[ERROR] " + e.getMessage());
-		}
-		return getLottoMoney();
-	}
-
-	private WinningLotto getWinningLotto(Lotto winningLottoNumbers) {
-		try {
-			LottoBall bonusNumber = new LottoBall(lottoGameView.getBonusNumber());
-			return new WinningLotto(winningLottoNumbers, bonusNumber);
-		} catch (IllegalArgumentException e) {
-			System.out.println("[ERROR] " + e.getMessage());
-			return getWinningLotto(winningLottoNumbers);
+			return getLottoMoney();
 		}
 	}
 
 	private Lotto getWinningLottoNumbers() {
 		try {
-			List<LottoBall> winningLottos = lottoGameView.getWinningLottoNumbers();
+			List<LottoNumber> winningLottos = lottoGameView.getWinningLottoNumbers();
 			return new Lotto(winningLottos);
 		} catch (NumberFormatException e) {
 			System.out.println("[ERROR] \", \"로 구분되는 숫자를 입력해주세요!");
@@ -63,6 +52,16 @@ public class LottoGameController {
 		} catch (IllegalArgumentException e) {
 			System.out.println("[ERROR] " + e.getMessage());
 			return getWinningLottoNumbers();
+		}
+	}
+
+	private WinningLotto getWinningLotto(Lotto winningLottoNumbers) {
+		try {
+			LottoNumber bonusNumber = new LottoNumber(lottoGameView.getBonusNumber());
+			return new WinningLotto(winningLottoNumbers, bonusNumber);
+		} catch (IllegalArgumentException e) {
+			System.out.println("[ERROR] " + e.getMessage());
+			return getWinningLotto(winningLottoNumbers);
 		}
 	}
 }

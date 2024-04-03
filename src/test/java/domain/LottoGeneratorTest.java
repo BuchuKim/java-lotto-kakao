@@ -16,11 +16,11 @@ public class LottoGeneratorTest {
 		LottoGenerator generator = new RandomLottoGenerator();
 		Lottos generated = generator.generateLottos(1);
 
-		List<LottoBall> lottoNumbers = generated.getLottos().get(0).getLottoNumbers();
+		List<LottoNumber> lottoNumbers = generated.getLottos().get(0).getLottoNumbers();
 		lottoNumbers.forEach(lottoBall -> {
-			assertThat(lottoBall.getLottoBall()).isBetween(Lotto.LOTTO_LOWER_BOUND, Lotto.LOTTO_UPPER_BOUND);
+			assertThat(lottoBall.getValue()).isBetween(LottoNumber.LOTTO_LOWER_BOUND, LottoNumber.LOTTO_UPPER_BOUND);
 		});
-		Set<LottoBall> lottoNumberSet = new HashSet<>(lottoNumbers);
+		Set<LottoNumber> lottoNumberSet = new HashSet<>(lottoNumbers);
 		assertThat(lottoNumberSet.size()).isEqualTo(Lotto.LOTTO_NUMBER_SIZE);
 	}
 }

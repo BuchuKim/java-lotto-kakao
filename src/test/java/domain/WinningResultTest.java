@@ -2,7 +2,9 @@ package domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -40,17 +42,24 @@ public class WinningResultTest {
 
 	private WinningResult generateTestWinningResult() {
 		// 사용자가 구매한 로또
-		Lotto testLotto1 = LottoBall.toLotto(1, 2, 3, 4, 5, 6); // 4개 일치
-		Lotto testLotto2 = LottoBall.toLotto(1, 2, 3, 4, 8, 9); // 6개 일치
-		Lotto testLotto3 = LottoBall.toLotto(1, 2, 3, 4, 8, 10); // 5개 + 보너스 일치
-		Lotto testLotto4 = LottoBall.toLotto(11, 12, 13, 14, 15, 16); // 꽝
+		Lotto testLotto1 = convertToLotto(1, 2, 3, 4, 5, 6); // 4개 일치
+		Lotto testLotto2 = convertToLotto(1, 2, 3, 4, 8, 9); // 6개 일치
+		Lotto testLotto3 = convertToLotto(1, 2, 3, 4, 8, 10); // 5개 + 보너스 일치
+		Lotto testLotto4 = convertToLotto(11, 12, 13, 14, 15, 16); // 꽝
 		Lottos testLottos = new Lottos(List.of(testLotto1, testLotto2, testLotto3, testLotto4));
 
 		// 당첨 로또
-		Lotto winnigLotto = LottoBall.toLotto(1, 2, 3, 4, 8, 9);
-		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoBall(10));
+		Lotto winnigLotto = convertToLotto(1, 2, 3, 4, 8, 9);
+		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoNumber(10));
 
 		// 결과 계산
 		return WinningResult.of(testWinningLotto, testLottos);
+	}
+
+	private Lotto convertToLotto(int ...lottoNumbers) {
+		return new Lotto(
+			Arrays.stream(lottoNumbers)
+				.mapToObj(LottoNumber::new)
+				.collect(Collectors.toList()));
 	}
 }

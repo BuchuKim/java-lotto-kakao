@@ -22,9 +22,12 @@ public enum Rank {
 		return winningMoney;
 	}
 
-	public static Rank findByMatchNumberCount(int matchNumberCount) {
-		if (matchNumberCount == 5) {
-			throw new IllegalArgumentException("추가 정보가 필요합니다.");
+	public static Rank findByMatchNumberCount(int matchNumberCount, boolean hasBonusNumber) {
+		if (matchNumberCount == MATCH_FIVE.matchNumberCount && hasBonusNumber) {
+			return MATCH_FIVE_WITH_BONUS;
+		}
+		if (matchNumberCount == MATCH_FIVE.matchNumberCount) {
+			return MATCH_FIVE;
 		}
 		return Arrays.stream(Rank.values())
 			.filter(rank -> rank.matchNumberCount == matchNumberCount)

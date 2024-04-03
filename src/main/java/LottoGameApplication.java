@@ -7,8 +7,7 @@ public class LottoGameApplication {
 	public static void main(String[] args) {
 		LottoGameView lottoGameView = new LottoGameView();
 		LottoGenerator lottoGenerator = new RandomLottoGenerator();
-		LottoGameController lottoGameController
-			= new LottoGameController(lottoGameView, lottoGenerator);
+		LottoGameController lottoGameController = new LottoGameController(lottoGameView, lottoGenerator);
 
 		lottoGameController.play();
 	}

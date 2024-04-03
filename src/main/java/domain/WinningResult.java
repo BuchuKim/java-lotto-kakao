@@ -25,6 +25,10 @@ public class WinningResult {
 		this.winningMoney.addWinningMoney(rank.getWinningMoney());
 	}
 
+	public EarningRate calculateEarningRate(LottoMoney lottoMoney) {
+		return EarningRate.of(lottoMoney, winningMoney);
+	}
+
 	public int getWinningCount(Rank rank) {
 		return this.winningResult.get(rank);
 	}
