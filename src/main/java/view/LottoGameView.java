@@ -21,6 +21,24 @@ public class LottoGameView {
 		return Integer.parseInt(sc.nextLine());
 	}
 
+	public int getManualLottoCount() {
+		try {
+			System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+			return Integer.parseInt(sc.nextLine());
+		} catch (NumberFormatException e) {
+			System.out.println("[ERROR] 숫자를 입력해주세요!");
+			return getManualLottoCount();
+		}
+	}
+	
+	public List<LottoNumber> getManualLottoNumbers() {
+		System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+		return Arrays.stream(sc.nextLine().split(LOTTO_SEPARATOR))
+			.map(Integer::parseInt)
+			.map(LottoNumber::new)
+			.collect(Collectors.toList());
+	}
+
 	public List<LottoNumber> getWinningLottoNumbers() {
 		System.out.println("지난 주 당첨 번호를 입력해 주세요.");
 		return Arrays.stream(sc.nextLine().split(LOTTO_SEPARATOR))
@@ -31,7 +49,7 @@ public class LottoGameView {
 
 	public int getBonusNumber() {
 		System.out.println("보너스 볼을 입력해 주세요.");
-		return sc.nextInt();
+		return Integer.parseInt(sc.nextLine());
 	}
 
 	private void printLotto(Lotto lotto) {
@@ -43,7 +61,8 @@ public class LottoGameView {
 	}
 
 	public void printPurchasedLottos(Lottos lottos) {
-		System.out.println(lottos.getLottoCount() + "개를 구매했습니다.");
+		System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.\n",
+			lottos.getManualLottoCount(), lottos.getAutoLottoCount());
 		lottos.getLottos().forEach(this::printLotto);
 		System.out.println();
 	}

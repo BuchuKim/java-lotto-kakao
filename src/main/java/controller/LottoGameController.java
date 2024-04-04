@@ -1,6 +1,8 @@
 package controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import domain.Lotto;
 import domain.LottoGenerator;
@@ -22,12 +24,13 @@ public class LottoGameController {
 
 	public void play() {
 		LottoMoney lottoMoney = getLottoMoney();
-		Lottos lottos = lottoGenerator.generateLottos(lottoMoney.calculateLottoCount());
 
-		lottoGameView.printPurchasedLottos(lottos);
+		Lottos bought = buyLottos(lottoMoney);
+		lottoGameView.printPurchasedLottos(bought);
+
 		Lotto winningLottoNumbers = getWinningLottoNumbers();
 		WinningLotto winningLotto = getWinningLotto(winningLottoNumbers);
-		WinningResult winningResult = WinningResult.of(winningLotto, lottos);
+		WinningResult winningResult = WinningResult.of(winningLotto, bought);
 
 		lottoGameView.printWinningRank(winningResult);
 		lottoGameView.printEarningRate(winningResult.calculateEarningRate(lottoMoney));
@@ -40,6 +43,23 @@ public class LottoGameController {
 			System.out.println("[ERROR] " + e.getMessage());
 			return getLottoMoney();
 		}
+	}
+
+	private Lottos buyLottos(LottoMoney lottoMoney) {
+		int manualLottoCount = lottoGameView.getManualLottoCount();
+		LottoMoney remain = lottoMoney.calculateRemainAfterBuy(manualLottoCount);
+
+		List<Lotto> manualLottos = getManualLottos(manualLottoCount);
+		List<Lotto> autoLottos = lottoGenerator.generateLottos(remain.calculateLottoCount());
+
+		return new Lottos(autoLottos, manualLottos);
+	}
+
+	private List<Lotto> getManualLottos(int count) {
+		return Stream.generate(lottoGameView::getManualLottoNumbers)
+			.limit(count)
+			.map(Lotto::new)
+			.collect(Collectors.toList());
 	}
 
 	private Lotto getWinningLottoNumbers() {
