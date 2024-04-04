@@ -10,6 +10,7 @@ import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
 import domain.Rank;
+import domain.WinningMoneyConstant;
 import domain.WinningResult;
 
 public class LottoGameView {
@@ -101,19 +102,19 @@ public class LottoGameView {
 	}
 
 	private void printDescription(Rank rank, int winningCount) {
-		if (rank.equals(Rank.MATCH_THREE)) {
+		if (rank.equals(WinningMoneyConstant.FIFTH_WIN_MONEY)) {
 			System.out.println("3개 일치 (5000원)- " + winningCount + "개");
 		}
-		if (rank.equals(Rank.MATCH_FOUR)) {
+		if (rank.equals(WinningMoneyConstant.FOURTH_WIN_MONEY)) {
 			System.out.println("4개 일치 (50000원)- " + winningCount + "개");
 		}
-		if (rank.equals(Rank.MATCH_FIVE)) {
+		if (rank.equals(WinningMoneyConstant.THIRD_WIN_MONEY)) {
 			System.out.println("5개 일치 (1500000원)- " + winningCount + "개");
 		}
-		if (rank.equals(Rank.MATCH_FIVE_WITH_BONUS)) {
+		if (rank.equals(WinningMoneyConstant.SECOND_WIN_MONEY)) {
 			System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + winningCount + "개");
 		}
-		if (rank.equals(Rank.MATCH_SIX)) {
+		if (rank.equals(WinningMoneyConstant.FIRST_WIN_MONEY)) {
 			System.out.println("6개 일치 (2000000000원)- " + winningCount + "개");
 		}
 	}

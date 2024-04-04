@@ -10,7 +10,7 @@ public class WinningResult {
 
 	private WinningResult() {
 		winningResult = new HashMap<>();
-		winningMoney = new WinningMoney(WinningMoney.ZERO);
+		winningMoney = new WinningMoney(WinningMoneyConstant.NONE_MONEY);
 		Arrays.stream(Rank.values()).forEach(rank -> winningResult.put(rank, 0));
 	}
 
@@ -22,7 +22,7 @@ public class WinningResult {
 
 	private void add(Rank rank) {
 		this.winningResult.put(rank, getWinningCount(rank) + 1);
-		this.winningMoney.addWinningMoney(rank.getWinningMoney());
+		this.winningMoney.add(rank.getWinningMoney());
 	}
 
 	public EarningRate calculateEarningRate(LottoMoney lottoMoney) {

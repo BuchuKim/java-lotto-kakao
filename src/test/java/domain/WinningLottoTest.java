@@ -19,8 +19,8 @@ public class WinningLottoTest {
 
 		Rank rank = testWinningLotto.getRank(testLotto);
 
-		assertThat(rank).isEqualTo(Rank.MATCH_THREE);
-		assertThat(rank.getWinningMoney()).isEqualTo(Rank.MATCH_THREE.getWinningMoney());
+		assertThat(rank).isEqualTo(Rank.FIFTH_WIN);
+		assertThat(rank.getWinningMoney().getMoney()).isEqualTo(WinningMoneyConstant.FIFTH_WIN_MONEY);
 	}
 
 	@Test
@@ -33,8 +33,8 @@ public class WinningLottoTest {
 
 		Rank rank = testWinningLotto.getRank(testLotto);
 
-		assertThat(rank).isEqualTo(Rank.MATCH_FOUR);
-		assertThat(rank.getWinningMoney()).isEqualTo(Rank.MATCH_FOUR.getWinningMoney());
+		assertThat(rank).isEqualTo(Rank.FOURTH_WIN);
+		assertThat(rank.getWinningMoney().getMoney()).isEqualTo(WinningMoneyConstant.FOURTH_WIN_MONEY);
 	}
 
 	@Test
@@ -47,8 +47,8 @@ public class WinningLottoTest {
 
 		Rank rank = testWinningLotto.getRank(testLotto);
 
-		assertThat(rank).isEqualTo(Rank.MATCH_FIVE);
-		assertThat(rank.getWinningMoney()).isEqualTo(Rank.MATCH_FIVE.getWinningMoney());
+		assertThat(rank).isEqualTo(Rank.THIRD_WIN);
+		assertThat(rank.getWinningMoney().getMoney()).isEqualTo(WinningMoneyConstant.THIRD_WIN_MONEY);
 	}
 
 	@Test
@@ -61,8 +61,8 @@ public class WinningLottoTest {
 
 		Rank rank = testWinningLotto.getRank(testLotto);
 
-		assertThat(rank).isEqualTo(Rank.MATCH_FIVE_WITH_BONUS);
-		assertThat(rank.getWinningMoney()).isEqualTo(Rank.MATCH_FIVE_WITH_BONUS.getWinningMoney());
+		assertThat(rank).isEqualTo(Rank.SECOND_WIN);
+		assertThat(rank.getWinningMoney().getMoney()).isEqualTo(WinningMoneyConstant.SECOND_WIN_MONEY);
 	}
 
 	@Test
@@ -75,8 +75,8 @@ public class WinningLottoTest {
 
 		Rank rank = testWinningLotto.getRank(testLotto);
 
-		assertThat(rank).isEqualTo(Rank.MATCH_SIX);
-		assertThat(rank.getWinningMoney()).isEqualTo(Rank.MATCH_SIX.getWinningMoney());
+		assertThat(rank).isEqualTo(Rank.FIRST_WIN);
+		assertThat(rank.getWinningMoney().getMoney()).isEqualTo(WinningMoneyConstant.FIRST_WIN_MONEY);
 	}
 
 	private Lotto convertToLotto(int ...lottoNumbers) {

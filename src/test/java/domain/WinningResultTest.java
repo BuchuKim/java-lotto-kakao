@@ -17,12 +17,12 @@ public class WinningResultTest {
 		// when : 당첨 통계(각 당첨 개수, 상금)를 계산한다.
 		WinningResult result = generateTestWinningResult();
 
-		assertThat(result.getWinningCount(Rank.LOSE)).isEqualTo(1);
-		assertThat(result.getWinningCount(Rank.MATCH_THREE)).isEqualTo(0);
-		assertThat(result.getWinningCount(Rank.MATCH_FOUR)).isEqualTo(1);
-		assertThat(result.getWinningCount(Rank.MATCH_FIVE)).isEqualTo(0);
-		assertThat(result.getWinningCount(Rank.MATCH_FIVE_WITH_BONUS)).isEqualTo(1);
-		assertThat(result.getWinningCount(Rank.MATCH_SIX)).isEqualTo(1);
+		assertThat(result.getWinningCount(Rank.NONE)).isEqualTo(1);
+		assertThat(result.getWinningCount(Rank.FIFTH_WIN)).isEqualTo(0);
+		assertThat(result.getWinningCount(Rank.FOURTH_WIN)).isEqualTo(1);
+		assertThat(result.getWinningCount(Rank.THIRD_WIN)).isEqualTo(0);
+		assertThat(result.getWinningCount(Rank.SECOND_WIN)).isEqualTo(1);
+		assertThat(result.getWinningCount(Rank.FOURTH_WIN)).isEqualTo(1);
 	}
 
 	@Test
@@ -32,10 +32,10 @@ public class WinningResultTest {
 		// when : 당첨 통계(각 당첨 개수, 상금)를 계산한다.
 		WinningResult result = generateTestWinningResult();
 
-		WinningMoney resultMoney = new WinningMoney(WinningMoney.ZERO);
-		resultMoney.addWinningMoney(new WinningMoney(WinningMoney.MATCH_FOUR));
-		resultMoney.addWinningMoney(new WinningMoney(WinningMoney.MATCH_FIVE_WITH_BONUS));
-		resultMoney.addWinningMoney(new WinningMoney(WinningMoney.MATCH_SIX));
+		WinningMoney resultMoney = new WinningMoney(WinningMoneyConstant.NONE_MONEY);
+		resultMoney.add(new WinningMoney(WinningMoneyConstant.FOURTH_WIN_MONEY));
+		resultMoney.add(new WinningMoney(WinningMoneyConstant.SECOND_WIN_MONEY));
+		resultMoney.add(new WinningMoney(WinningMoneyConstant.FIRST_WIN_MONEY));
 
 		assertThat(result.getWinningMoney()).isEqualTo(resultMoney);
 	}
