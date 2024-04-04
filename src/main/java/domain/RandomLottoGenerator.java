@@ -13,10 +13,10 @@ public class RandomLottoGenerator implements LottoGenerator {
 			.mapToObj(LottoNumber::new).collect(Collectors.toList());
 
 	@Override
-	public Lottos generateLottos(int lottoCount) {
+	public List<Lotto> generateLottos(int lottoCount) {
 		return Stream.generate(this::generateLotto)
 			.limit(lottoCount)
-			.collect(Collectors.collectingAndThen(Collectors.toList(), Lottos::new));
+			.collect(Collectors.toList());
 	}
 
 	private Lotto generateLotto() {
