@@ -39,6 +39,15 @@ public class LottoTest {
 		assertThat(lotto.contains(new LottoNumber(7))).isFalse();
 	}
 
+	@Test
+	@DisplayName("일치하는 번호의 개수를 반환한다.")
+	void countSameNumberTest() {
+		Lotto lotto = convertToLotto(6, 5, 4, 3, 2, 1);
+		Lotto other = convertToLotto(6, 5, 4, 3, 2, 1);
+
+		assertThat(lotto.countSameNumber(other)).isEqualTo(6);
+	}
+
 	private Lotto convertToLotto(int ...lottoNumbers) {
 		 return new Lotto(
 			 Arrays.stream(lottoNumbers)
