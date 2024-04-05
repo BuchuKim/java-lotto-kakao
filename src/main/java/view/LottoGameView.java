@@ -73,6 +73,10 @@ public class LottoGameView {
 		}
 	}
 
+	public void printPurchasedLottoCount(int manualLottoCount, int autoLottoCount) {
+		System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.\n", manualLottoCount, autoLottoCount);
+	}
+
 	private void printLotto(Lotto lotto) {
 		System.out.println("["
 			+ lotto.getLottoNumbers().stream()
@@ -82,8 +86,6 @@ public class LottoGameView {
 	}
 
 	public void printPurchasedLottos(Lottos lottos) {
-		System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.\n",
-			lottos.getManualLottoCount(), lottos.getAutoLottoCount());
 		lottos.getLottos().forEach(this::printLotto);
 		System.out.println();
 	}

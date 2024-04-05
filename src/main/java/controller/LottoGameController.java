@@ -50,9 +50,12 @@ public class LottoGameController {
 		List<Lotto> manualLottos = getManualLottos(manualLottoCount);
 
 		LottoMoney remain = lottoMoney.calculateRemainAfterBuy(manualLottoCount);
-		List<Lotto> autoLottos = lottoGenerator.generateLottos(remain.calculateLottoCount());
+		int autoLottoCount = remain.calculateLottoCount();
+		List<Lotto> autoLottos = lottoGenerator.generateLottos(autoLottoCount);
 
-		return new Lottos(autoLottos, manualLottos);
+		lottoGameView.printPurchasedLottoCount(manualLottoCount, autoLottoCount);
+		return new Lottos(Stream.concat(manualLottos.stream(), autoLottos.stream())
+			.collect(Collectors.toList()));
 	}
 
 	private List<Lotto> getManualLottos(int count) {

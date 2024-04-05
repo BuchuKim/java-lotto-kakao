@@ -46,7 +46,7 @@ public class WinningResultTest {
 		Lotto testLotto2 = convertToLotto(1, 2, 3, 4, 8, 9); // 6개 일치
 		Lotto testLotto3 = convertToLotto(1, 2, 3, 4, 8, 10); // 5개 + 보너스 일치
 		Lotto testLotto4 = convertToLotto(11, 12, 13, 14, 15, 16); // 꽝
-		Lottos testLottos = new Lottos(List.of(testLotto1, testLotto2, testLotto3, testLotto4), List.of());
+		Lottos testLottos = new Lottos(List.of(testLotto1, testLotto2, testLotto3, testLotto4));
 
 		// 당첨 로또
 		Lotto winnigLotto = convertToLotto(1, 2, 3, 4, 8, 9);
