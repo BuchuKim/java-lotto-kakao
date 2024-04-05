@@ -53,7 +53,7 @@ public class WinningResultTest {
 		WinningLotto testWinningLotto = new WinningLotto(winnigLotto, new LottoNumber(10));
 
 		// 결과 계산
-		return WinningResult.of(testWinningLotto, testLottos);
+		return testLottos.calculateWinningResult(testWinningLotto);
 	}
 
 	private Lotto convertToLotto(int ...lottoNumbers) {

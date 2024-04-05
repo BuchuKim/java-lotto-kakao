@@ -27,4 +27,10 @@ public class Lottos {
 		totalLottos.addAll(autoLottos);
 		return Collections.unmodifiableList(totalLottos);
 	}
+
+	public WinningResult calculateWinningResult(WinningLotto winningLotto) {
+		WinningResult result = new WinningResult();
+		getLottos().forEach(lotto -> result.add(winningLotto.getRank(lotto)));
+		return result;
+	}
 }

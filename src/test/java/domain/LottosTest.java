@@ -29,6 +29,24 @@ public class LottosTest {
 		assertThat(testLottos.getLottos().size()).isEqualTo(4);
 	}
 
+	@Test
+	@DisplayName("당첨 번호와 비교하여 당첨 결과를 확인할 수 있다.")
+	void checkWinningResultTest() {
+		// given: 수동과 자동 로또가 각각 2개 존재한다.
+		Lottos testLottos = generateTestLottos();
+		WinningLotto winningLotto =
+			new WinningLotto(generateLottoFrom(1, 2, 3, 4, 5, 6), new LottoNumber(7));
+
+		// when: 당첨 번호와 비교하여 당첨 결과를 확인한다.
+		WinningResult winningResult = testLottos.calculateWinningResult(winningLotto);
+
+		assertThat(winningResult.getWinningCount(Rank.FIRST_WIN)).isEqualTo(1);
+		assertThat(winningResult.getWinningCount(Rank.SECOND_WIN)).isEqualTo(1);
+		assertThat(winningResult.getWinningCount(Rank.THIRD_WIN)).isEqualTo(0);
+		assertThat(winningResult.getWinningCount(Rank.FOURTH_WIN)).isEqualTo(1);
+		assertThat(winningResult.getWinningCount(Rank.FIFTH_WIN)).isEqualTo(1);
+	}
+
 	/**
 	 * 수동, 자동 로또가 각각 2개 존재합니다.
 	 * @return
@@ -36,10 +54,10 @@ public class LottosTest {
 	private Lottos generateTestLottos() {
 		List<Lotto> autoLotto = List.of(
 			generateLottoFrom(1, 2, 3, 4, 5, 6),
-			generateLottoFrom(1, 2, 3, 4, 5, 6));
+			generateLottoFrom(2, 3, 4, 5, 6, 7));
 		List<Lotto> manualLotto = List.of(
-			generateLottoFrom(1, 2, 3, 4, 5, 6),
-			generateLottoFrom(1, 2, 3, 4, 5, 6));
+			generateLottoFrom(3, 4, 5, 6, 7, 8),
+			generateLottoFrom(4, 5, 6, 7, 8, 9));
 
 		return new Lottos(autoLotto, manualLotto);
 	}

@@ -30,7 +30,7 @@ public class LottoGameController {
 
 		Lotto winningLottoNumbers = getWinningLottoNumbers();
 		WinningLotto winningLotto = getWinningLotto(winningLottoNumbers);
-		WinningResult winningResult = WinningResult.of(winningLotto, bought);
+		WinningResult winningResult = bought.calculateWinningResult(winningLotto);
 
 		lottoGameView.printWinningRank(winningResult);
 		lottoGameView.printEarningRate(winningResult.calculateEarningRate(lottoMoney));
