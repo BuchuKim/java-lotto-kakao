@@ -3,12 +3,12 @@ package domain;
 import java.util.Arrays;
 
 public enum Rank {
-	NONE(0, new WinningMoney(WinningMoneyConstant.NONE_MONEY)),
-	FIFTH_WIN(3, new WinningMoney(WinningMoneyConstant.FIFTH_WIN_MONEY)),
-	FOURTH_WIN(4, new WinningMoney(WinningMoneyConstant.FOURTH_WIN_MONEY)),
-	THIRD_WIN(5, new WinningMoney(WinningMoneyConstant.THIRD_WIN_MONEY)),
-	SECOND_WIN(5, new WinningMoney(WinningMoneyConstant.SECOND_WIN_MONEY)),
-	FIRST_WIN(6, new WinningMoney(WinningMoneyConstant.FIRST_WIN_MONEY));
+	NONE(0, new WinningMoney(0)),
+	FIFTH_WIN(3, new WinningMoney(5_000)),
+	FOURTH_WIN(4, new WinningMoney(50_000)),
+	THIRD_WIN(5, new WinningMoney(1_500_000)),
+	SECOND_WIN(5, new WinningMoney(30_000_000)),
+	FIRST_WIN(6, new WinningMoney(2_000_000_000));
 
 	private final int matchNumberCount;
 	private final WinningMoney winningMoney;

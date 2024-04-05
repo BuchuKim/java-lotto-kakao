@@ -9,7 +9,7 @@ public class EarningRateTest {
 	@DisplayName("총 수익률을 계산한다.")
 	void earningRateTest() {
 		LottoMoney spent = new LottoMoney(10500);
-		WinningMoney earned = new WinningMoney(WinningMoneyConstant.FIFTH_WIN_MONEY);
+		WinningMoney earned = new WinningMoney(Rank.FIFTH_WIN.getWinningMoney().getMoney());
 
 		EarningRate earningRate = EarningRate.of(spent, earned);
 		double expected = (double)earned.getMoney() / spent.getSpentMoney();

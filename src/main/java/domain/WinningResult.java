@@ -10,7 +10,7 @@ public class WinningResult {
 
 	public WinningResult() {
 		winningResult = new HashMap<>();
-		winningMoney = new WinningMoney(WinningMoneyConstant.NONE_MONEY);
+		winningMoney = new WinningMoney(Rank.NONE.getWinningMoney().getMoney());
 		Arrays.stream(Rank.values()).forEach(rank -> winningResult.put(rank, 0));
 	}
 

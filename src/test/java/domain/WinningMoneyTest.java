@@ -9,10 +9,11 @@ public class WinningMoneyTest {
 	@Test
 	@DisplayName("당첨 상금을 더하는 것이 가능하다.")
 	void addWinningAmountTest() {
-		WinningMoney winningMoney = new WinningMoney(WinningMoneyConstant.FOURTH_WIN_MONEY);
-		winningMoney.add(new WinningMoney(WinningMoneyConstant.THIRD_WIN_MONEY));
+		WinningMoney winningMoney = new WinningMoney(Rank.FOURTH_WIN.getWinningMoney().getMoney());
+		winningMoney.add(new WinningMoney(Rank.THIRD_WIN.getWinningMoney().getMoney()));
 
-		long expectedAmount = WinningMoneyConstant.FOURTH_WIN_MONEY + WinningMoneyConstant.THIRD_WIN_MONEY;
+		long expectedAmount = Rank.FOURTH_WIN.getWinningMoney().getMoney()
+			+ Rank.THIRD_WIN.getWinningMoney().getMoney();
 		assertThat(winningMoney.getMoney()).isEqualTo(expectedAmount);
 	}
 }

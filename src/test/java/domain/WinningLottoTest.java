@@ -20,7 +20,7 @@ public class WinningLottoTest {
 		Rank rank = testWinningLotto.getRank(testLotto);
 
 		assertThat(rank).isEqualTo(Rank.FIFTH_WIN);
-		assertThat(rank.getWinningMoney().getMoney()).isEqualTo(WinningMoneyConstant.FIFTH_WIN_MONEY);
+		assertThat(rank.getWinningMoney()).isEqualTo(Rank.FIFTH_WIN.getWinningMoney());
 	}
 
 	@Test
@@ -34,7 +34,7 @@ public class WinningLottoTest {
 		Rank rank = testWinningLotto.getRank(testLotto);
 
 		assertThat(rank).isEqualTo(Rank.FOURTH_WIN);
-		assertThat(rank.getWinningMoney().getMoney()).isEqualTo(WinningMoneyConstant.FOURTH_WIN_MONEY);
+		assertThat(rank.getWinningMoney()).isEqualTo(Rank.FOURTH_WIN.getWinningMoney());
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class WinningLottoTest {
 		Rank rank = testWinningLotto.getRank(testLotto);
 
 		assertThat(rank).isEqualTo(Rank.THIRD_WIN);
-		assertThat(rank.getWinningMoney().getMoney()).isEqualTo(WinningMoneyConstant.THIRD_WIN_MONEY);
+		assertThat(rank.getWinningMoney()).isEqualTo(Rank.THIRD_WIN.getWinningMoney());
 	}
 
 	@Test
@@ -62,7 +62,7 @@ public class WinningLottoTest {
 		Rank rank = testWinningLotto.getRank(testLotto);
 
 		assertThat(rank).isEqualTo(Rank.SECOND_WIN);
-		assertThat(rank.getWinningMoney().getMoney()).isEqualTo(WinningMoneyConstant.SECOND_WIN_MONEY);
+		assertThat(rank.getWinningMoney()).isEqualTo(Rank.SECOND_WIN.getWinningMoney());
 	}
 
 	@Test
@@ -76,7 +76,7 @@ public class WinningLottoTest {
 		Rank rank = testWinningLotto.getRank(testLotto);
 
 		assertThat(rank).isEqualTo(Rank.FIRST_WIN);
-		assertThat(rank.getWinningMoney().getMoney()).isEqualTo(WinningMoneyConstant.FIRST_WIN_MONEY);
+		assertThat(rank.getWinningMoney()).isEqualTo(Rank.FIRST_WIN.getWinningMoney());
 	}
 
 	private Lotto convertToLotto(int ...lottoNumbers) {

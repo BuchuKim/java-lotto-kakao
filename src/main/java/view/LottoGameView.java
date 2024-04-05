@@ -10,7 +10,6 @@ import domain.Lotto;
 import domain.LottoNumber;
 import domain.Lottos;
 import domain.Rank;
-import domain.WinningMoneyConstant;
 import domain.WinningResult;
 
 public class LottoGameView {
@@ -74,7 +73,8 @@ public class LottoGameView {
 	}
 
 	public void printPurchasedLottoCount(int manualLottoCount, int autoLottoCount) {
-		System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.\n", manualLottoCount, autoLottoCount);
+		System.out.printf("수동으로 %d개, 자동으로 %d개를 구매했습니다.\n",
+			manualLottoCount, autoLottoCount);
 	}
 
 	private void printLotto(Lotto lotto) {
@@ -104,19 +104,19 @@ public class LottoGameView {
 	}
 
 	private void printDescription(Rank rank, int winningCount) {
-		if (rank.equals(WinningMoneyConstant.FIFTH_WIN_MONEY)) {
+		if (Rank.FIFTH_WIN.equals(rank)) {
 			System.out.println("3개 일치 (5000원)- " + winningCount + "개");
 		}
-		if (rank.equals(WinningMoneyConstant.FOURTH_WIN_MONEY)) {
+		if (Rank.FOURTH_WIN.equals(rank)) {
 			System.out.println("4개 일치 (50000원)- " + winningCount + "개");
 		}
-		if (rank.equals(WinningMoneyConstant.THIRD_WIN_MONEY)) {
+		if (Rank.THIRD_WIN.equals(rank)) {
 			System.out.println("5개 일치 (1500000원)- " + winningCount + "개");
 		}
-		if (rank.equals(WinningMoneyConstant.SECOND_WIN_MONEY)) {
+		if (Rank.SECOND_WIN.equals(rank)) {
 			System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + winningCount + "개");
 		}
-		if (rank.equals(WinningMoneyConstant.FIRST_WIN_MONEY)) {
+		if (Rank.FIRST_WIN.equals(rank)) {
 			System.out.println("6개 일치 (2000000000원)- " + winningCount + "개");
 		}
 	}

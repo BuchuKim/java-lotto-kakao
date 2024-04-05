@@ -32,10 +32,10 @@ public class WinningResultTest {
 		// when : 당첨 통계(각 당첨 개수, 상금)를 계산한다.
 		WinningResult result = generateTestWinningResult();
 
-		WinningMoney resultMoney = new WinningMoney(WinningMoneyConstant.NONE_MONEY);
-		resultMoney.add(new WinningMoney(WinningMoneyConstant.FOURTH_WIN_MONEY));
-		resultMoney.add(new WinningMoney(WinningMoneyConstant.SECOND_WIN_MONEY));
-		resultMoney.add(new WinningMoney(WinningMoneyConstant.FIRST_WIN_MONEY));
+		WinningMoney resultMoney = new WinningMoney(Rank.NONE.getWinningMoney().getMoney());
+		resultMoney.add(new WinningMoney(Rank.FOURTH_WIN.getWinningMoney().getMoney()));
+		resultMoney.add(new WinningMoney(Rank.SECOND_WIN.getWinningMoney().getMoney()));
+		resultMoney.add(new WinningMoney(Rank.FIRST_WIN.getWinningMoney().getMoney()));
 
 		assertThat(result.getWinningMoney()).isEqualTo(resultMoney);
 	}
