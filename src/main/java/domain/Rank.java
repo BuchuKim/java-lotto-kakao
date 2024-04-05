@@ -18,10 +18,6 @@ public enum Rank {
 		this.winningMoney = winningMoney;
 	}
 
-	public WinningMoney getWinningMoney() {
-		return winningMoney;
-	}
-
 	public static Rank findByMatchNumberCount(int matchNumberCount, boolean hasBonusNumber) {
 		if (matchNumberCount == SECOND_WIN.matchNumberCount && hasBonusNumber) {
 			return SECOND_WIN;
@@ -33,5 +29,9 @@ public enum Rank {
 			.filter(rank -> rank.matchNumberCount == matchNumberCount)
 			.findFirst()
 			.orElse(NONE);
+	}
+
+	public WinningMoney getWinningMoney() {
+		return winningMoney;
 	}
 }

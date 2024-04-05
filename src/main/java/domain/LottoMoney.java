@@ -17,7 +17,7 @@ public class LottoMoney {
 		if (remain < 0) {
 			throw new IllegalStateException("금액이 부족합니다!");
 		}
-		return new LottoMoney(lottoMoney - count * LOTTO_PRICE_UNIT);
+		return new LottoMoney(remain);
 	}
 
 	public int calculateLottoCount() {

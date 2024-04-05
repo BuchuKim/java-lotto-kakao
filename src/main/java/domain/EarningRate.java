@@ -16,7 +16,7 @@ public class EarningRate {
 		if (spent == 0) {
 			return 0;
 		}
-		return (double)earned / spent;
+		return (double) earned / spent;
 	}
 
 	public double getEarningRate() {
