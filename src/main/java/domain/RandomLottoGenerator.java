@@ -7,6 +7,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import domain.lotto.Lotto;
+import domain.lotto.LottoNumber;
+
 public class RandomLottoGenerator implements LottoGenerator {
 	private static final List<LottoNumber> numbers =
 		IntStream.rangeClosed(LottoNumber.LOTTO_LOWER_BOUND, LottoNumber.LOTTO_UPPER_BOUND)

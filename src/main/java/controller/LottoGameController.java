@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import domain.Lotto;
+import domain.lotto.Lotto;
 import domain.LottoGenerator;
 import domain.LottoMoney;
-import domain.LottoNumber;
-import domain.Lottos;
-import domain.WinningLotto;
+import domain.lotto.LottoNumber;
+import domain.lotto.Lottos;
+import domain.lotto.WinningLotto;
 import domain.WinningResult;
 import view.LottoGameView;
 
@@ -47,22 +47,21 @@ public class LottoGameController {
 
 	private Lottos buyLottos(LottoMoney lottoMoney) {
 		int manualLottoCount = lottoGameView.getManualLottoCount();
-		List<Lotto> manualLottos = getManualLottos(manualLottoCount);
+		Lottos manualLottos = getManualLottos(manualLottoCount);
 
 		LottoMoney remain = lottoMoney.calculateRemainAfterBuy(manualLottoCount);
 		int autoLottoCount = remain.calculateLottoCount();
-		List<Lotto> autoLottos = lottoGenerator.generateLottos(autoLottoCount);
+		Lottos autoLottos = new Lottos(lottoGenerator.generateLottos(autoLottoCount));
 
 		lottoGameView.printPurchasedLottoCount(manualLottoCount, autoLottoCount);
-		return new Lottos(Stream.concat(manualLottos.stream(), autoLottos.stream())
-			.collect(Collectors.toList()));
+		return manualLottos.concat(autoLottos);
 	}
 
-	private List<Lotto> getManualLottos(int count) {
-		return Stream.generate(lottoGameView::getManualLottoNumbers)
+	private Lottos getManualLottos(int count) {
+		return new Lottos(Stream.generate(lottoGameView::getManualLottoNumbers)
 			.limit(count)
 			.map(Lotto::new)
-			.collect(Collectors.toList());
+			.collect(Collectors.toList()));
 	}
 
 	private Lotto getWinningLottoNumbers() {

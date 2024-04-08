@@ -1,4 +1,4 @@
-package domain;
+package domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -8,6 +8,13 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import domain.Rank;
+import domain.WinningResult;
+import domain.lotto.Lotto;
+import domain.lotto.LottoNumber;
+import domain.lotto.Lottos;
+import domain.lotto.WinningLotto;
 
 public class LottosTest {
 	@Test
@@ -24,6 +31,17 @@ public class LottosTest {
 		assertThat(winningResult.getWinningCount(Rank.THIRD_WIN)).isEqualTo(0);
 		assertThat(winningResult.getWinningCount(Rank.FOURTH_WIN)).isEqualTo(0);
 		assertThat(winningResult.getWinningCount(Rank.FIFTH_WIN)).isEqualTo(1);
+	}
+	
+	@Test
+	@DisplayName("두 Lottos를 합칠 수 있다.")
+	void concatTest() {
+		Lottos lottos1 = generateTestLottos();
+		Lottos lottos2 = generateTestLottos();
+
+		Lottos concatenatedLottos = lottos1.concat(lottos2);
+
+		assertThat(concatenatedLottos.getLottos()).hasSize(8);
 	}
 
 	private Lottos generateTestLottos() {

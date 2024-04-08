@@ -6,9 +6,9 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import domain.EarningRate;
-import domain.Lotto;
-import domain.LottoNumber;
-import domain.Lottos;
+import domain.lotto.Lotto;
+import domain.lotto.LottoNumber;
+import domain.lotto.Lottos;
 import domain.Rank;
 import domain.WinningResult;
 

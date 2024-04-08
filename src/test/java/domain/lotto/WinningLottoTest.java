@@ -1,4 +1,4 @@
-package domain;
+package domain.lotto;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -7,6 +7,11 @@ import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import domain.Rank;
+import domain.lotto.Lotto;
+import domain.lotto.LottoNumber;
+import domain.lotto.WinningLotto;
 
 public class WinningLottoTest {
 	@Test

@@ -9,6 +9,11 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import domain.lotto.Lotto;
+import domain.lotto.LottoNumber;
+import domain.lotto.Lottos;
+import domain.lotto.WinningLotto;
+
 public class WinningResultTest {
 	@Test
 	@DisplayName("당첨 통계 정보를 계산할 수 있다.")
