@@ -7,9 +7,9 @@ public class EarningRate {
 		this.earningRate = earningRate;
 	}
 
-	public static EarningRate of(LottoMoney lottoMoney, WinningMoney winningMoney) {
+	public static EarningRate of(LottoMoney lottoMoney, WinningResult winningResult) {
 		return new EarningRate(calculate(lottoMoney.getSpentMoney(),
-			winningMoney.getMoney()));
+			winningResult.getWinningMoney().getMoney()));
 	}
 
 	private static double calculate(int spent, long earned) {

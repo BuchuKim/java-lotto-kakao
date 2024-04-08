@@ -7,22 +7,19 @@ import java.util.Map;
 
 public class WinningResult {
 	private final Map<Rank, Integer> winningResult;
-	private final WinningMoney winningMoney;
 
 	public WinningResult(List<Rank> ranks) {
 		winningResult = new HashMap<>();
-		winningMoney = new WinningMoney(Rank.NONE.getWinningMoney().getMoney());
 		Arrays.stream(Rank.values()).forEach(rank -> winningResult.put(rank, 0));
 		ranks.forEach(this::add);
 	}
 
 	public void add(Rank rank) {
 		this.winningResult.put(rank, getWinningCount(rank) + 1);
-		this.winningMoney.add(rank.getWinningMoney());
 	}
 
 	public EarningRate calculateEarningRate(LottoMoney lottoMoney) {
-		return EarningRate.of(lottoMoney, winningMoney);
+		return EarningRate.of(lottoMoney, this);
 	}
 
 	public int getWinningCount(Rank rank) {
@@ -30,6 +27,10 @@ public class WinningResult {
 	}
 
 	public WinningMoney getWinningMoney() {
-		return this.winningMoney;
+		long result = winningResult.keySet().stream()
+			.map(rank -> rank.getWinningMoney().getMoney() * getWinningCount(rank))
+			.mapToLong(Long::longValue)
+			.sum();
+		return new WinningMoney(result);
 	}
 }
