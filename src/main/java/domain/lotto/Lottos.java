@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import domain.Rank;
 import domain.WinningResult;
 
 public class Lottos {
@@ -16,9 +17,10 @@ public class Lottos {
 	}
 
 	public WinningResult calculateWinningResult(WinningLotto winningLotto) {
-		WinningResult result = new WinningResult();
-		getLottos().forEach(lotto -> result.add(winningLotto.getRank(lotto)));
-		return result;
+		List<Rank> ranks = this.lottos.stream()
+			.map(winningLotto::getRank)
+			.collect(Collectors.toList());
+		return new WinningResult(ranks);
 	}
 	
 	public Lottos concat(Lottos lottos) {

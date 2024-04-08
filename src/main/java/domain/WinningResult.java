@@ -2,16 +2,18 @@ package domain;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class WinningResult {
 	private final Map<Rank, Integer> winningResult;
 	private final WinningMoney winningMoney;
 
-	public WinningResult() {
+	public WinningResult(List<Rank> ranks) {
 		winningResult = new HashMap<>();
 		winningMoney = new WinningMoney(Rank.NONE.getWinningMoney().getMoney());
 		Arrays.stream(Rank.values()).forEach(rank -> winningResult.put(rank, 0));
+		ranks.forEach(this::add);
 	}
 
 	public void add(Rank rank) {
