@@ -11,10 +11,13 @@ import domain.lotto.Lotto;
 import domain.lotto.LottoNumber;
 
 public class RandomLottoGenerator implements LottoGenerator {
-	private static final List<LottoNumber> numbers =
-		IntStream.rangeClosed(LottoNumber.LOTTO_LOWER_BOUND, LottoNumber.LOTTO_UPPER_BOUND)
+	private static final List<LottoNumber> NUMBERS;
+	static {
+		NUMBERS = IntStream.rangeClosed(LottoNumber.LOTTO_LOWER_BOUND, LottoNumber.LOTTO_UPPER_BOUND)
 			.mapToObj(LottoNumber::new).collect(Collectors.toList());
-
+	
+	}
+	
 	@Override
 	public List<Lotto> generateLottos(int lottoCount) {
 		return Stream.generate(this::generateLotto)
@@ -23,8 +26,8 @@ public class RandomLottoGenerator implements LottoGenerator {
 	}
 
 	private Lotto generateLotto() {
-		Collections.shuffle(numbers);
-		List<LottoNumber> lottoNumbers = new ArrayList<>(numbers.subList(0, Lotto.LOTTO_NUMBER_SIZE));
+		Collections.shuffle(NUMBERS);
+		List<LottoNumber> lottoNumbers = new ArrayList<>(NUMBERS.subList(0, Lotto.LOTTO_NUMBER_SIZE));
 		return new Lotto(lottoNumbers);
 	}
 }
