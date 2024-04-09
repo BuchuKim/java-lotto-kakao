@@ -95,29 +95,19 @@ public class LottoGameView {
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 
-		Arrays.stream(Rank.values())
-			.forEach(rank -> printDescription(rank, winningResult.getWinningCount(rank)));
+		printDescription(winningResult);
 	}
 
 	public void printEarningRate(EarningRate earningRate) {
 		System.out.printf("총 수익률은 %.2f입니다.\n", earningRate.getEarningRate());
 	}
 
-	private void printDescription(Rank rank, int winningCount) {
-		if (Rank.FIFTH_WIN.equals(rank)) {
-			System.out.println("3개 일치 (5000원)- " + winningCount + "개");
-		}
-		if (Rank.FOURTH_WIN.equals(rank)) {
-			System.out.println("4개 일치 (50000원)- " + winningCount + "개");
-		}
-		if (Rank.THIRD_WIN.equals(rank)) {
-			System.out.println("5개 일치 (1500000원)- " + winningCount + "개");
-		}
-		if (Rank.SECOND_WIN.equals(rank)) {
-			System.out.println("5개 일치, 보너스 볼 일치(30000000원)- " + winningCount + "개");
-		}
-		if (Rank.FIRST_WIN.equals(rank)) {
-			System.out.println("6개 일치 (2000000000원)- " + winningCount + "개");
-		}
+	private void printDescription(WinningResult winningResult) {
+		Arrays.stream(Rank.values())
+			.filter(rank -> rank != Rank.NONE)
+			.forEach(rank -> {
+				System.out.println(winningResult.getWinningCount(rank) + "개 일치 ("
+					+ rank.getWinningMoney().getMoney() + "원)- " + winningResult.getWinningCount(rank) + "개");
+			});
 	}
 }
