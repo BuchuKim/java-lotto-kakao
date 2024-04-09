@@ -1,17 +1,12 @@
 package domain;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class WinningResult {
 	private final Map<Rank, Integer> winningResult;
 
-	public WinningResult(List<Rank> ranks) {
-		winningResult = new HashMap<>();
-		Arrays.stream(Rank.values()).forEach(rank -> winningResult.put(rank, 0));
-		ranks.forEach(this::add);
+	public WinningResult(Map<Rank, Integer> winningResult) {
+		this.winningResult = winningResult;
 	}
 
 	public void add(Rank rank) {

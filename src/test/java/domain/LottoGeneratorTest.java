@@ -11,15 +11,16 @@ import java.util.Set;
 
 import domain.lotto.Lotto;
 import domain.lotto.LottoNumber;
+import domain.lotto.Lottos;
 
 public class LottoGeneratorTest {
 	@Test
 	@DisplayName("로또생성기는 1부터 45까지, 6개의 서로다른 숫자로 이뤄진 로또 번호를 생성한다.")
 	void lottoNumberTest() {
 		LottoGenerator generator = new RandomLottoGenerator();
-		List<Lotto> generated = generator.generateLottos(1);
+		Lottos generated = generator.generateLottos(1);
 
-		List<LottoNumber> lottoNumbers = generated.get(0).getLottoNumbers();
+		List<LottoNumber> lottoNumbers = generated.getLottos().get(0).getLottoNumbers();
 		lottoNumbers.forEach(lottoBall -> {
 			assertThat(lottoBall.getValue()).isBetween(LottoNumber.LOTTO_LOWER_BOUND, LottoNumber.LOTTO_UPPER_BOUND);
 		});

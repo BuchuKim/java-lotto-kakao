@@ -2,7 +2,9 @@ package domain.lotto;
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,10 +19,12 @@ public class Lottos {
 	}
 
 	public WinningResult calculateWinningResult(WinningLotto winningLotto) {
-		List<Rank> ranks = this.lottos.stream()
+		Map<Rank, Integer> winningResult = new HashMap<>();
+		Arrays.stream(Rank.values()).forEach(rank -> winningResult.put(rank, 0));
+		this.lottos.stream()
 			.map(winningLotto::getRank)
-			.collect(Collectors.toList());
-		return new WinningResult(ranks);
+			.forEach(rank -> winningResult.put(rank, winningResult.get(rank) + 1));
+		return new WinningResult(winningResult);
 	}
 	
 	public Lottos concat(Lottos lottos) {

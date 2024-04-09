@@ -51,7 +51,7 @@ public class LottoGameController {
 
 		LottoMoney remain = lottoMoney.calculateRemainAfterBuy(manualLottoCount);
 		int autoLottoCount = remain.calculateLottoCount();
-		Lottos autoLottos = new Lottos(lottoGenerator.generateLottos(autoLottoCount));
+		Lottos autoLottos = lottoGenerator.generateLottos(autoLottoCount);
 
 		lottoGameView.printPurchasedLottoCount(manualLottoCount, autoLottoCount);
 		return manualLottos.concat(autoLottos);

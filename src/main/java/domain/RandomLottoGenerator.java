@@ -9,6 +9,7 @@ import java.util.stream.Stream;
 
 import domain.lotto.Lotto;
 import domain.lotto.LottoNumber;
+import domain.lotto.Lottos;
 
 public class RandomLottoGenerator implements LottoGenerator {
 	private static final List<LottoNumber> NUMBERS;
@@ -19,10 +20,10 @@ public class RandomLottoGenerator implements LottoGenerator {
 	}
 	
 	@Override
-	public List<Lotto> generateLottos(int lottoCount) {
-		return Stream.generate(this::generateLotto)
+	public Lottos generateLottos(int lottoCount) {
+		return new Lottos(Stream.generate(this::generateLotto)
 			.limit(lottoCount)
-			.collect(Collectors.toList());
+			.collect(Collectors.toList()));
 	}
 
 	private Lotto generateLotto() {
