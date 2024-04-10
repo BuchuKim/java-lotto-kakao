@@ -12,6 +12,7 @@ import domain.lotto.Lottos;
 import domain.lotto.WinningLotto;
 import domain.WinningResult;
 import view.LottoGameView;
+import view.dto.WinningResultDto;
 
 public class LottoGameController {
 	private final LottoGameView lottoGameView;
@@ -32,7 +33,7 @@ public class LottoGameController {
 		WinningLotto winningLotto = getWinningLotto(winningLottoNumbers);
 		WinningResult winningResult = bought.calculateWinningResult(winningLotto);
 
-		lottoGameView.printWinningRank(winningResult);
+		lottoGameView.printWinningRank(WinningResultDto.fromWinningResult(winningResult));
 		lottoGameView.printEarningRate(winningResult.calculateEarningRate(lottoMoney));
 	}
 

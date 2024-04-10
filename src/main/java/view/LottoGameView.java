@@ -9,8 +9,7 @@ import domain.EarningRate;
 import domain.lotto.Lotto;
 import domain.lotto.LottoNumber;
 import domain.lotto.Lottos;
-import domain.Rank;
-import domain.WinningResult;
+import view.dto.WinningResultDto;
 
 public class LottoGameView {
 	private final Scanner sc = new Scanner(System.in);
@@ -90,22 +89,27 @@ public class LottoGameView {
 		System.out.println();
 	}
 
-	public void printWinningRank(WinningResult winningResult) {
+	public void printWinningRank(List<WinningResultDto> winningResults) {
 		System.out.println();
 		System.out.println("당첨 통계");
 		System.out.println("---------");
 
-		printDescription(winningResult);
+		printDescription(winningResults);
 	}
 
 	public void printEarningRate(EarningRate earningRate) {
 		System.out.printf("총 수익률은 %.2f입니다.\n", earningRate.getEarningRate());
 	}
 
-	private void printDescription(WinningResult winningResult) {
-		Arrays.stream(Rank.values())
-			.filter(rank -> rank != Rank.NONE)
-			.forEach(rank -> System.out.println(rank.getMatchNumberCount() + "개 일치 ("
-					+ rank.getWinningMoney().getMoney() + "원)- " + winningResult.getWinningCount(rank) + "개"));
+	private void printDescription(List<WinningResultDto> winningResults) {
+		winningResults.forEach(winningResult -> {
+			if (winningResult.requiresBonusNumber()) {
+				System.out.println(winningResult.getRequiredMatchCount() + "개 일치, 보너스 볼 일치 ("
+					+ winningResult.getWinningMoney() + "원)- " + winningResult.getMatchCount() + "개");
+				return;
+			}
+			System.out.println(winningResult.getRequiredMatchCount() + "개 일치 ("
+				+ winningResult.getWinningMoney() + "원)- " + winningResult.getMatchCount() + "개");
+		});
 	}
 }
