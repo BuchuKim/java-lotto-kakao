@@ -9,10 +9,6 @@ public class WinningResult {
 		this.winningResult = winningResult;
 	}
 
-	public void add(Rank rank) {
-		this.winningResult.put(rank, getWinningCount(rank) + 1);
-	}
-
 	public EarningRate calculateEarningRate(LottoMoney lottoMoney) {
 		return EarningRate.of(lottoMoney, this);
 	}

@@ -30,6 +30,10 @@ public enum Rank {
 			.findFirst()
 			.orElse(NONE);
 	}
+	
+	public int getMatchNumberCount() {
+		return matchNumberCount;
+	}
 
 	public WinningMoney getWinningMoney() {
 		return winningMoney;

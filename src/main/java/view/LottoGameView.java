@@ -105,9 +105,7 @@ public class LottoGameView {
 	private void printDescription(WinningResult winningResult) {
 		Arrays.stream(Rank.values())
 			.filter(rank -> rank != Rank.NONE)
-			.forEach(rank -> {
-				System.out.println(winningResult.getWinningCount(rank) + "개 일치 ("
-					+ rank.getWinningMoney().getMoney() + "원)- " + winningResult.getWinningCount(rank) + "개");
-			});
+			.forEach(rank -> System.out.println(rank.getMatchNumberCount() + "개 일치 ("
+					+ rank.getWinningMoney().getMoney() + "원)- " + winningResult.getWinningCount(rank) + "개"));
 	}
 }
